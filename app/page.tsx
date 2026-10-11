@@ -5,7 +5,8 @@ import Ticker from "@/components/Ticker";
 // Fetch data from API
 async function getProducts() {
   try {
-    const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products", {
+    // API Link Updated Below
+    const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products", {
       next: { revalidate: 60 } // Cache for 60 seconds
     });
     if (!res.ok) throw new Error("Failed to fetch");
@@ -19,7 +20,7 @@ async function getProducts() {
 export default async function Home() {
   const products = await getProducts();
 
-  // API ডাটা অনুযায়ী Sorting লজিক
+  // API ডাটা অনুযায়ী Sorting লজিক
   const risers = [...products]
     .filter((p) => p.change?.dir === "up")
     .sort((a, b) => (b.change?.pct || 0) - (a.change?.pct || 0))
@@ -43,7 +44,7 @@ export default async function Home() {
         {/* Section A: Top Risers */}
         <section>
           <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-            <span className="text-red-500">▲</span> আজ দাম বেড়েছে
+            <span className="text-red-500">▲</span> আজ দাম বেড়েছে
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {risers.map((product: any) => (
@@ -68,7 +69,7 @@ export default async function Home() {
         <section id="all-products" className="scroll-mt-24">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-gray-900">সব পণ্য</h2>
-            <p className="text-gray-500 text-sm mt-1">সব প্রয়োজনীয় পণ্যের আজকের বাজার দর</p>
+            <p className="text-gray-500 text-sm mt-1">সব প্রয়োজনীয় পণ্যের আজকের বাজার দর</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {products.map((product: any) => (

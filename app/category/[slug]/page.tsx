@@ -15,7 +15,8 @@ function CategoryContent() {
 
   useEffect(() => {
     if (!slug) return;
-    fetch("https://api.api-store.workers.dev/api/bazardor/products")
+    // API Link Updated Below
+    fetch("https://openapi.programming-hero.com/api/bazardor/products")
       .then((res) => res.json())
       .then((data) => {
         const filtered = data.filter((p: any) => p.category === slug);
@@ -47,7 +48,7 @@ function CategoryContent() {
   if (products.length === 0) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-20 text-center min-h-[60vh]">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">এই ক্যাটাগরিতে কোনো পণ্য পাওয়া যায়নি!</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">এই ক্যাটাগরিতে কোনো পণ্য পাওয়া যায়নি!</h2>
         <Link href="/" className="px-6 py-3 bg-[#10B981] text-white rounded-md hover:bg-[#059669]">
           হোম পেজে ফিরে যান
         </Link>
@@ -89,7 +90,7 @@ function CategoryContent() {
   );
 }
 
-// Suspense দিয়ে র‍্যাপ করে এক্সপোর্ট করা হলো
+// Suspense দিয়ে র‍্যাপ করে এক্সপোর্ট করা হলো
 export default function CategoryPage() {
   return (
     <Suspense fallback={

@@ -1,4 +1,3 @@
-// app/product/[slug]/page.tsx
 "use client";
 import { useEffect, useState, Suspense } from "react";
 import { useParams } from "next/navigation";
@@ -13,10 +12,11 @@ function ProductContent() {
 
   useEffect(() => {
     if (!slug) return;
-    fetch("https://api.api-store.workers.dev/api/bazardor/products")
+    // API Link Updated Below
+    fetch("https://openapi.programming-hero.com/api/bazardor/products")
       .then((res) => res.json())
       .then((data) => {
-        // slug অথবা id দিয়ে প্রোডাক্টটি খুঁজে বের করা
+        // slug অথবা id দিয়ে প্রোডাক্টটি খুঁজে বের করা
         const found = data.find((p: any) => p.slug === slug || p.id.toString() === slug);
         setProduct(found);
         setLoading(false);
@@ -37,7 +37,7 @@ function ProductContent() {
   if (!product) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-20 text-center min-h-[60vh]">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">পণ্যটি পাওয়া যায়নি!</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">পণ্যটি পাওয়া যায়নি!</h2>
         <Link href="/" className="px-6 py-3 bg-[#10B981] text-white rounded-md hover:bg-[#059669]">
           হোম পেজে ফিরে যান
         </Link>
@@ -49,7 +49,7 @@ function ProductContent() {
   const unitTranslate: Record<string, string> = { kg: "কেজি", liter: "লিটার", dozen: "ডজন", piece: "পিস", gm: "গ্রাম" };
   const displayUnit = unitTranslate[product.unit] || product.unit;
 
-  // দামের হিসাব (সর্বনিম্ন, সর্বাধিক, গড়)
+  // দামের হিসাব (সর্বনিম্ন, সর্বাধিক, গড়)
   let overallMin = product.today;
   let overallMax = product.today;
   let overallAvg = product.today;
@@ -83,8 +83,8 @@ function ProductContent() {
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-1">{product.nameBn}</h1>
             <p className="text-gray-500">প্রতি {displayUnit} {product.categoryNameBn}</p>
-            {isUp && <p className="text-red-500 text-sm mt-2 font-medium">গতকালের তুলনায় আজ দাম বেড়েছে</p>}
-            {isDown && <p className="text-[#10B981] text-sm mt-2 font-medium">গতকালের তুলনায় আজ দাম কমেছে</p>}
+            {isUp && <p className="text-red-500 text-sm mt-2 font-medium">গতকালের তুলনায় আজ দাম বেড়েছে</p>}
+            {isDown && <p className="text-[#10B981] text-sm mt-2 font-medium">গতকালের তুলনায় আজ দাম কমেছে</p>}
           </div>
         </div>
         
@@ -108,7 +108,7 @@ function ProductContent() {
           <p className="text-xs text-gray-400 mt-1">সবচেয়ে বেশি দামের বাজার</p>
         </div>
         <div className="bg-white p-6 rounded-xl border border-gray-200 flex flex-col justify-center shadow-sm">
-          <p className="text-sm text-gray-500 mb-2">গড় দাম</p>
+          <p className="text-sm text-gray-500 mb-2">গড় দাম</p>
           <p className="text-2xl font-bold text-gray-900">{overallAvg} টাকা</p>
           <p className="text-xs text-gray-400 mt-1">প্রতি {displayUnit}-এর হিসাবে</p>
         </div>
@@ -127,7 +127,7 @@ function ProductContent() {
                     <th className="py-4 px-6">বিভাগ</th>
                     <th className="py-4 px-6">সর্বনিম্ন</th>
                     <th className="py-4 px-6">সর্বাধিক</th>
-                    <th className="py-4 px-6">গড়</th>
+                    <th className="py-4 px-6">গড়</th>
                   </tr>
                 </thead>
                 <tbody className="text-sm text-gray-800">
